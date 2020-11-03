@@ -1,0 +1,59 @@
+#navContainer {
+  text-align: center;
+  height: 50px;
+}
+
+.tabButton {
+  display: inline-block;
+  font-family: Orbitron;
+  font-size: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 11px;
+  height: 50px;
+}
+
+.navBar {
+  background-color: rgba(0, 0, 0, .3);
+  height: 50px;
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: blue;
+}
+
+.tab {
+  
+}
+
+#tabContainer {
+  text-align: center;
+  height: 900px;
+}
+
+#curiosityTab {
+  display: none;
+  border: 1px solid rgba(0, 0, 0, .3);
+  height: 90%;
+  width: 90%;
+}
+
+#opportunityTab {
+  display: none;
+  border: 1px solid rgba(0, 0, 0, .3);
+  height: 90%;
+  width: 90%;
+}
+
+#spiritTab {
+  display: none;
+  border: 1px solid rgba(0, 0, 0, .3);
+  height: 90%;
+  width: 90%;
+}
