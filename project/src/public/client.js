@@ -43,6 +43,7 @@ const render = async (root, state) => {
 `
   }
 
+
 // create content
 const App = (state) => {
     
@@ -54,11 +55,15 @@ const curiosityButton = document.getElementById('curiosity');
 const opportunityButton = document.getElementById('opportunity');
 const spiritButton = document.getElementById('spirit');
 
+
+// check for store update
+
+
 /*
-getData(data, 'curiosity');
-getData(data, 'opportunity');
-getData(data, 'spirit');
-*/
+    photo = document.createElement('div');
+    photo.innerHTML = data.photos[0];
+    curiosityTab.appendChild(photo);
+*/ 
 
 //display tab function
 
@@ -70,14 +75,11 @@ const displayCuriosityTab = () => {
     opportunityTab.style.display = 'none';
     curiosityTab.style.display = 'inline-block';
     
-    getData(data, 'curiosity');
-    
- /*
-    photo = document.createElement('div');
-    photo.innerHTML = data.photos[0];
-    curiosityTab.appendChild(photo);
-  */
-}
+    getData(data, 'curiosity', curiosityTab);
+
+
+    }
+
 
 
 /*  TEST UNIT
@@ -95,6 +97,8 @@ const displayOpportunityTab = () => {
     curiosityTab.style.display = 'none';
     opportunityTab.style.display = 'inline-block';
 
+    getData(data, 'opportunity', opportunityTab);
+
 
 }
 
@@ -106,13 +110,18 @@ const displaySpiritTab = () => {
     opportunityTab.style.display = 'none';
     spiritTab.style.display = 'inline-block';
 
+    getData(data, 'spirit', spiritTab);
+    const showStore = () => {
+      console.log(store.data);
+  }
+  
 
 }
 
 
-/*  TEST API UNIT
+/*
 async function testApiPull() {
-    const apiFetch = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=1000&api_key=Gv5rFsnXyiFh4tuFN5Bwypvc1HKxAWUCvxZeBtnY').then((res) => res.json());
+    const apiFetch = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=Gv5rFsnXyiFh4tuFN5Bwypvc1HKxAWUCvxZeBtnY').then((res) => res.json());
     console.log(apiFetch);
 }
 testApiPull();
@@ -131,19 +140,26 @@ window.addEventListener('load', () => {
 
 
 
-// Example API call
-const getData = (state, currentRover) => {
+// API call from localhost
+
+const getData = async (state, rover, tab) => {
+  
     let { data } = state;
-    
-    let result = fetch(`http://localhost:3000/data?rover=${currentRover}`, {
-        headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           }
-    })
+    let result = await fetch(`http://localhost:3000/data?rover=${rover}`)
         .then(res => res.json())
         .then(data => updateStore(store, { data }))
+        console.log('this is when the chain ends');
+        console.log(store.data);
+
+        photo = document.createElement('div');
+        photo.innerHTML = store.data.data.photos[0].img_src;
+        console.dir(store.data.data.photos);
+        tab.appendChild(photo);
 
 
-    return data
-}
+        return result
+
+        }
+
+    
+
