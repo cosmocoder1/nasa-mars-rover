@@ -151,8 +151,8 @@ const getData = async (state, rover, tab) => {
         console.log('this is when the chain ends');
         console.log(store.data);
 
-        photo = document.createElement('div');
-        photo.innerHTML = store.data.data.photos[0].img_src;
+        photo = document.createElement('img');
+        photo.src = store.data.data.photos[0].img_src;
         console.dir(store.data.data.photos);
         tab.appendChild(photo);
 
