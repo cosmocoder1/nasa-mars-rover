@@ -1,3 +1,16 @@
+#titleContainer {
+  text-align: center;
+}
+
+#title {
+  margin: 0 auto;
+  display: inline-block;
+  font-family: Orbitron;
+  font-weight: 600;
+  font-size: 30px;
+  padding-bottom: 15px;
+}
+
 #navContainer {
   text-align: center;
   height: 50px;
@@ -28,32 +41,33 @@ a:hover {
   color: blue;
 }
 
-.tab {
-  
-}
-
 #tabContainer {
   text-align: center;
   height: 900px;
 }
 
 #curiosityTab {
-  display: none;
+  margin: 0 auto;
   border: 1px solid rgba(0, 0, 0, .3);
   height: 90%;
   width: 90%;
 }
 
 #opportunityTab {
-  display: none;
+  margin: 0 auto;
   border: 1px solid rgba(0, 0, 0, .3);
   height: 90%;
   width: 90%;
 }
 
 #spiritTab {
-  display: none;
+  margin: 0 auto;
   border: 1px solid rgba(0, 0, 0, .3);
   height: 90%;
   width: 90%;
+}
+
+img {
+  height: 300px;
+  width: auto;
 }

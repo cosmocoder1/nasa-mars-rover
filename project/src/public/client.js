@@ -22,6 +22,9 @@ const render = async (root, state) => {
   const content = () => {
     return `
     <header>
+    <div id="titleContainer">
+      <div id="title">NASA Mars Rover</div>
+    </div>  
       <div id="navContainer">
         <div class="navBar" id="navBar">
           <div class="tabButton"><a href="#" id="curiosity" onclick="displayCuriosityTab()">Curiosity rover</a></div>
@@ -33,9 +36,6 @@ const render = async (root, state) => {
 
     <main>
       <div id="tabContainer">
-        <div class="tab" id="curiosityTab">Curiosity tab</div>
-        <div class="tab" id="opportunityTab">Opportunity tab</div>
-        <div class="tab" id="spiritTab">Spirit tab</div>
       </div>
     </main>
 
@@ -65,18 +65,21 @@ const spiritButton = document.getElementById('spirit');
     curiosityTab.appendChild(photo);
 */ 
 
+
+
 //display tab function
 
 const displayCuriosityTab = () => {
     
     let { data } = store;
-    const curiosityTab = document.getElementById('curiosityTab');
-    spiritTab.style.display = 'none';
-    opportunityTab.style.display = 'none';
-    curiosityTab.style.display = 'inline-block';
+    const tabContainer = document.getElementById('tabContainer');
+    tabContainer.removeChild(tabContainer.firstChild);
+    const curiosityTab = document.createElement('div');
+    curiosityTab.classList.add("tab");
+    curiosityTab.setAttribute("id", "curiosityTab");
+    tabContainer.appendChild(curiosityTab);
     
     getData(data, 'curiosity', curiosityTab);
-
 
     }
 
@@ -91,11 +94,14 @@ const showStore = () => {
 */    
 
 const displayOpportunityTab = () => {
-    let { rovers, data } = store;
-    const opportunityTab = document.getElementById('opportunityTab');
-    spiritTab.style.display = 'none';
-    curiosityTab.style.display = 'none';
-    opportunityTab.style.display = 'inline-block';
+
+    let { data } = store;
+    const tabContainer = document.getElementById('tabContainer');
+    tabContainer.removeChild(tabContainer.firstChild);
+    const opportunityTab = document.createElement('div');
+    opportunityTab.classList.add("tab");
+    opportunityTab.setAttribute("id", "opportunityTab");
+    tabContainer.appendChild(opportunityTab);
 
     getData(data, 'opportunity', opportunityTab);
 
@@ -104,28 +110,18 @@ const displayOpportunityTab = () => {
 
 
 const displaySpiritTab = () => {
-    let { rovers, data } = store;
-    const spiritTab = document.getElementById('spiritTab');
-    curiosityTab.style.display = 'none';
-    opportunityTab.style.display = 'none';
-    spiritTab.style.display = 'inline-block';
+    let { data } = store;
+    const tabContainer = document.getElementById('tabContainer');
+    tabContainer.removeChild(tabContainer.firstChild);
+    const spiritTab = document.createElement('div');
+    spiritTab.classList.add("tab");
+    spiritTab.setAttribute("id", "spiritTab");
+    tabContainer.appendChild(spiritTab);
 
     getData(data, 'spirit', spiritTab);
-    const showStore = () => {
-      console.log(store.data);
+    
   }
-  
 
-}
-
-
-/*
-async function testApiPull() {
-    const apiFetch = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=Gv5rFsnXyiFh4tuFN5Bwypvc1HKxAWUCvxZeBtnY').then((res) => res.json());
-    console.log(apiFetch);
-}
-testApiPull();
-*/
 
 
 // listening for load event because page should load before any JS is called
@@ -148,18 +144,24 @@ const getData = async (state, rover, tab) => {
     let result = await fetch(`http://localhost:3000/data?rover=${rover}`)
         .then(res => res.json())
         .then(data => updateStore(store, { data }))
-        console.log('this is when the chain ends');
-        console.log(store.data);
+        console.dir(store.data);
 
+        photoContainer = document.createElement('div');
         photo = document.createElement('img');
         photo.src = store.data.data.photos[0].img_src;
-        console.dir(store.data.data.photos);
-        tab.appendChild(photo);
-
+    
+        tab.appendChild(photoContainer);
+        photoContainer.appendChild(photo);
 
         return result
 
         }
 
     
-
+/*
+async function testApiPull() {
+    const apiFetch = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=Gv5rFsnXyiFh4tuFN5Bwypvc1HKxAWUCvxZeBtnY').then((res) => res.json());
+    console.log(apiFetch);
+}
+testApiPull();
+*/
