@@ -27,9 +27,20 @@
 }
 
 .navBar {
-  background-color: rgba(0, 0, 0, .3);
   height: 50px;
   display: inline-block;
+}
+
+.tabButton {
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.dataContainer {
+  margin-top: 20px;
+}
+
+.photoContainer {
+  margin-top: 30px;
 }
 
 a {
@@ -48,21 +59,18 @@ a:hover {
 
 #curiosityTab {
   margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, .3);
   height: 90%;
   width: 90%;
 }
 
 #opportunityTab {
   margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, .3);
   height: 90%;
   width: 90%;
 }
 
 #spiritTab {
   margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, .3);
   height: 90%;
   width: 90%;
 }
@@ -70,4 +78,45 @@ a:hover {
 img {
   height: 300px;
   width: auto;
+}
+
+.data {
+  font-family: Orbitron;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 812px) {
+  .photoContainer {
+    margin-top: 40px;
+  }
+  .dataContainer {
+    margin-top: 200px;
+  }
+  .tabButton {
+    margin-top: 15px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .photoContainer {
+    margin-top: 40px;
+  }
+  .dataContainer {
+    margin-top: 150px;
+  }
+  .tabButton {
+    margin-top: 15px;
+  }
+}
+
+@media only screen and (max-width: 542px) {
+  .photoContainer {
+    margin-top: 40px;
+  }
+  .dataContainer {
+    margin-top: 200px;
+  }
+  .tabButton {
+    margin-top: 15px;
+  }
 }

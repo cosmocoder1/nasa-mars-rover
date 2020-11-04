@@ -1,12 +1,10 @@
-
-
 let store = {
     data: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit'],
+    rovers: Immutable.List(['Curiosity', 'Opportunity', 'Spirit']),
     currentTab: '',
 }
 
-// add our markup to the page
+// add markup
 const root = document.getElementById('root')
 
 const updateStore = (store, newState) => {
@@ -18,12 +16,11 @@ const render = async (root, state) => {
     root.innerHTML = App(state)
 }
 
-
-  const content = () => {
-    return `
+const content = () => {
+  return `
     <header>
-    <div id="titleContainer">
-      <div id="title">NASA Mars Rover</div>
+      <div id="titleContainer">
+        <div id="title">NASA Mars Rover</div>
     </div>  
       <div id="navContainer">
         <div class="navBar" id="navBar">
@@ -56,16 +53,6 @@ const opportunityButton = document.getElementById('opportunity');
 const spiritButton = document.getElementById('spirit');
 
 
-// check for store update
-
-
-/*
-    photo = document.createElement('div');
-    photo.innerHTML = data.photos[0];
-    curiosityTab.appendChild(photo);
-*/ 
-
-
 
 //display tab function
 
@@ -79,19 +66,10 @@ const displayCuriosityTab = () => {
     curiosityTab.setAttribute("id", "curiosityTab");
     tabContainer.appendChild(curiosityTab);
     
-    getData(data, 'curiosity', curiosityTab);
+    getData(data, 'Curiosity', curiosityTab, 'active', 'November 26, 2011', 'August 6, 2012');
 
     }
 
-
-
-/*  TEST UNIT
-const showStore = () => {
-        console.log(store.data);
-    }
-    
-    setTimeout(showStore, 3000)
-*/    
 
 const displayOpportunityTab = () => {
 
@@ -103,8 +81,7 @@ const displayOpportunityTab = () => {
     opportunityTab.setAttribute("id", "opportunityTab");
     tabContainer.appendChild(opportunityTab);
 
-    getData(data, 'opportunity', opportunityTab);
-
+    getData(data, 'Opportunity', opportunityTab, 'complete', 'July 7, 2003', 'January 25, 2004');
 
 }
 
@@ -118,7 +95,7 @@ const displaySpiritTab = () => {
     spiritTab.setAttribute("id", "spiritTab");
     tabContainer.appendChild(spiritTab);
 
-    getData(data, 'spirit', spiritTab);
+    getData(data, 'Spirit', spiritTab, 'complete', 'June 10, 2003', 'January 1, 2004');
     
   }
 
@@ -138,20 +115,61 @@ window.addEventListener('load', () => {
 
 // API call from localhost
 
-const getData = async (state, rover, tab) => {
+const getData = async (state, rover, tab, status, dateLaunched, dateLanded) => {
   
     let { data } = state;
-    let result = await fetch(`http://localhost:3000/data?rover=${rover}`)
+    let result = await fetch(`http://localhost:3000/data?rover=${rover.toLowerCase()}`)
         .then(res => res.json())
         .then(data => updateStore(store, { data }))
         console.dir(store.data);
 
+        // add rover data to tab
+        dataContainer = document.createElement('div');
+        dataContainer.classList.add('dataContainer');
+
+        roverName = document.createElement('div');
+        roverName.classList.add('data');
+        roverName.innerHTML = `Rover name: ${rover}`;
+
+        launchDate = document.createElement('div');
+        launchDate.classList.add('data');
+        launchDate.innerHTML = `Launch date: ${dateLaunched}`;
+
+        landDate = document.createElement('div');
+        landDate.classList.add('data');
+        landDate.innerHTML = `Land date: ${dateLanded}`;
+
+        missionStatus = document.createElement('div');
+        missionStatus.classList.add('data');
+        missionStatus.innerHTML = `Mission status: ${status}`;
+
+        photoDate = document.createElement('div');
+        photoDate.classList.add('data');
+        /*
+        photoDate.innerHTML = `photo date`;
+        */
+
+        // display data
+        tab.appendChild(dataContainer);
+        dataContainer.appendChild(roverName);
+        dataContainer.appendChild(launchDate);
+        dataContainer.appendChild(landDate);
+        dataContainer.appendChild(missionStatus);
+        dataContainer.appendChild(photoDate);
+
+        // display photos
         photoContainer = document.createElement('div');
-        photo = document.createElement('img');
-        photo.src = store.data.data.photos[0].img_src;
-    
+        photoContainer.classList.add('photoContainer');
         tab.appendChild(photoContainer);
+
+        
+        for (let i = 0; i < store.data.data.photos.length && i < 5; i++) {
+        photo = document.createElement('img');
+        photoUrlArr = store.data.data.photos.map(input => input.img_src);
+        photo.src = photoUrlArr[i];
         photoContainer.appendChild(photo);
+        }
+        
 
         return result
 
