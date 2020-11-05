@@ -1,3 +1,4 @@
+/* header */
 #titleContainer {
   text-align: center;
 }
@@ -11,36 +12,10 @@
   padding-bottom: 15px;
 }
 
+/* nav */
 #navContainer {
   text-align: center;
   height: 50px;
-}
-
-.tabButton {
-  display: inline-block;
-  font-family: Orbitron;
-  font-size: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 11px;
-  height: 50px;
-}
-
-.navBar {
-  height: 50px;
-  display: inline-block;
-}
-
-.tabButton {
-  background-color: rgba(0, 0, 0, .3);
-}
-
-.dataContainer {
-  margin-top: 20px;
-}
-
-.photoContainer {
-  margin-top: 30px;
 }
 
 a {
@@ -52,6 +27,54 @@ a:hover {
   color: blue;
 }
 
+.tabButton {
+  display: inline-block;
+  font-family: Orbitron;
+  font-size: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 11px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.navBar {
+  height: 50px;
+  display: inline-block;
+}
+
+/* greeting */
+#welcomeContainer {
+  margin-top: 200px;
+  display: block;
+  text-align: center;
+}
+
+#welcome {
+  display: inline-block;
+  font-family: Orbitron;
+  font-size: 40px;
+  font-weight: 500;
+  position: relative;
+  
+}
+
+/* rover data */
+.dataContainer {
+  margin-top: 20px;
+}
+
+.photoContainer {
+  margin-top: 30px;
+}
+
+.data {
+  font-family: Orbitron;
+  font-weight: 500;
+}
+
+
+/* rover tabs */
 #tabContainer {
   text-align: center;
   height: 900px;
@@ -75,16 +98,14 @@ a:hover {
   width: 90%;
 }
 
+
+/* photo format */
 img {
   height: 300px;
   width: auto;
 }
 
-.data {
-  font-family: Orbitron;
-  font-weight: 500;
-}
-
+/* media queries */
 @media only screen and (max-width: 812px) {
   .photoContainer {
     margin-top: 40px;
@@ -118,5 +139,8 @@ img {
   }
   .tabButton {
     margin-top: 15px;
+  }
+  #welcome {
+    font-size: 30px;
   }
 }
