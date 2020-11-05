@@ -163,9 +163,9 @@ const getData = async (state, rover, tab, status, dateLaunched, dateLanded) => {
         tab.appendChild(photoContainer);
 
         
-        for (let i = 0; i < store.data.data.photos.length && i < 5; i++) {
+        for (let i = 0; i < store.data.data.latest_photos.length && i < 5; i++) {
         photo = document.createElement('img');
-        photoUrlArr = store.data.data.photos.map(input => input.img_src);
+        photoUrlArr = store.data.data.latest_photos.map(input => input.img_src);
         photo.src = photoUrlArr[i];
         photoContainer.appendChild(photo);
         }

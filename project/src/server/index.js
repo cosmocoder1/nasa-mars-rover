@@ -22,7 +22,7 @@ app.get('/data', async (req, res) => {
    
     const rover = req.query.rover;
     try {
-        let data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?api_key=${process.env.API_KEY}&sol=1000`)
+        let data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${process.env.API_KEY}`)
         .then(res => res.json())
         res.send({ data })
     } catch (err) {
